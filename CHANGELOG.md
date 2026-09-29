@@ -1,1 +1,2 @@
 - v0.1 · 29.09.26 · pilot offer page and mock cohort dashboard with drill-down and csv export
+- v0.2 · 29.09.26 · removed the placeholder and mock-data banners; book a 30-minute call goes to calendly; write to ananya by email

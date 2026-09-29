@@ -16,23 +16,6 @@
     try { localStorage.setItem('theme', next); } catch (e) {}
   });
 
-  /* ---------- book a call: mailto, no form, nothing stored ---------- */
-  var subject = 'pramaan pilot: a 20-minute call';
-  var body = [
-    'hello,',
-    '',
-    'i would like a 20-minute call about an eight-week pramaan pilot.',
-    '',
-    'school:',
-    'city:',
-    'grades and number of sections we are thinking of:',
-    'two times that suit me this week:',
-    '',
-    'thank you'
-  ].join('\n');
-  document.getElementById('book-mail').setAttribute('href',
-    'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body));
-
   /* ---------- mock data ---------- */
   function mulberry32(a) {
     return function () {
@@ -285,7 +268,7 @@
     var out = [head.join(',')];
     function push(section, r) {
       out.push([
-        'mock', 'hill view school (fictional)', section, r.week, r.date, r.enrolled, r.responses,
+        'example', 'hill view school', section, r.week, r.date, r.enrolled, r.responses,
         r.curiosity, r.motivation, r.efficacy,
         r.held ? 'held back: fewer than 10 answered' : ''
       ].map(csvCell).join(','));
@@ -300,7 +283,7 @@
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
-    a.download = 'pramaan-pilot-mock-' + (current === 'all' ? 'whole-school' : current) + '.csv';
+    a.download = 'pramaan-pilot-' + (current === 'all' ? 'whole-school' : current) + '.csv';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -322,7 +305,7 @@
     Array.prototype.forEach.call(document.querySelectorAll('[data-end]'), function (a) {
       a.hidden = (a.getAttribute('data-end') === 'dashboard') === isDash;
     });
-    document.title = isDash ? 'sample dashboard · pramaan for schools' : 'pramaan for schools';
+    document.title = isDash ? 'dashboard · pramaan for schools' : 'pramaan for schools';
     if (isDash) {
       var id = hash.split('/')[1];
       current = CLASSES.some(function (c) { return c.id === id; }) ? id : 'all';

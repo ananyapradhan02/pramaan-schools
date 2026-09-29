@@ -21,7 +21,7 @@ A two-view page for school heads and principals: the PRAMAAN eight-week pilot of
 
 Nothing is scripted AI. The dashboard data is generated in the browser from a fixed seed (`20260706`), so every visitor sees the same numbers. Nothing is sent anywhere; the only thing stored is the theme choice in `localStorage`.
 
-Placeholders to replace before a real pitch: prices (₹60,000 pilot, ₹1,500 per student per term) and the call link, which is a `mailto:` with a prefilled subject and note but no address (set it in `app.js`, `book-mail`).
+Prices on the page: ₹60,000 for the pilot, ₹1,500 per student per term after it. "book a 30-minute call" goes to Ananya's Calendly; "write to ananya" opens an email to ananyapradhan02@gmail.com. The page carries no placeholder or mock-data banners; the dashboard school (hill view school) and its numbers are illustrative, generated from a fixed seed.
 
 ## test script (for one real principal or school head, ten minutes)
 
@@ -37,6 +37,11 @@ Give them the live link on their phone, say nothing else, and time them.
 - Whether the price anchor is big enough (if nobody flinches at ₹60,000, test higher next time).
 - Whether principals want the weekly dashboard at all, or only the week-8 report (which decides if the next build is the printable report or the ops board).
 
+## contact
+
+- book a call: https://calendly.com/ananyapradhan/30min
+- write to ananya: ananyapradhan02@gmail.com
+
 ## status
 
-v0.1 · 29.09.26 · first release. MIT licence.
+v0.2 · 29.09.26 · banners removed, calendly and email wired in. MIT licence.
