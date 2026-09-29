@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>pramaan for schools</title>
+  <meta name="description" content="An eight-week PRAMAAN pilot for grades 6 to 8, with an outcome report on curiosity, motivation and self-efficacy, and a sample cohort dashboard on mock data.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="app.css">
+  <script>
+    try { var t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <a class="wordmark" href="#offer">pramaan <em>schools</em></a>
+      <nav aria-label="views">
+        <a class="pill" href="#offer" data-nav="offer">the offer</a>
+        <a class="pill" href="#dashboard" data-nav="dashboard">sample dashboard</a>
+        <button class="pill theme-toggle" id="theme" type="button" aria-label="toggle theme">theme</button>
+      </nav>
+    </header>
+
+    <!-- ============ view 1: the offer ============ -->
+    <main id="view-offer" class="view" data-view="offer">
+      <section class="section enter">
+        <h1>an eight-week pilot, <em>measured</em></h1>
+        <p class="dek">pramaan runs question-first lessons in two to four of your sections for one term, then hands you a plain report on what changed in curiosity, motivation and self-efficacy.</p>
+
+        <div class="box glance">
+          <p class="label">the pilot in sixty seconds</p>
+          <dl>
+            <dt>what</dt>
+            <dd>two forty-minute pramaan sessions a week, inside your timetable, built on chapters your teachers already teach. children start from a question they want answered, not from the answer.</dd>
+            <dt>who</dt>
+            <dd>grades 6 to 8. two to four sections, up to about one hundred and forty students.</dd>
+            <dt>how long</dt>
+            <dd>eight weeks, one term. set-up takes one meeting.</dd>
+            <dt>you get</dt>
+            <dd>an outcome report at week eight, a live class-level dashboard from week one, teacher training, and a review meeting with your leadership team.</dd>
+            <dt>you give</dt>
+            <dd>two periods a week per section, one teacher lead, and a few minutes of each student's time for short questionnaires.</dd>
+            <dt>cost</dt>
+            <dd><span class="mono">₹60,000</span> flat for the pilot <span class="stamp stop">placeholder</span></dd>
+          </dl>
+          <div class="row actions">
+            <a class="pill primary" id="book-top" href="#book">book a 20-minute call</a>
+            <a class="pill" href="#dashboard">see the sample dashboard →</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how">
+        <p class="label">what a pilot is</p>
+        <ol class="steps">
+          <li>
+            <span class="mono step-when">week 0</span>
+            <div>
+              <h3>set-up</h3>
+              <p>one hour with you and the teacher leads. we pick the sections and the chapters, send a parent note in english and kannada, and collect consent before any questionnaire.</p>
+            </div>
+          </li>
+          <li>
+            <span class="mono step-when">weeks 1 to 8</span>
+            <div>
+              <h3>sessions</h3>
+              <p>two sessions a week per section, co-taught with your teacher so the method stays in the school after we leave. a two-minute pulse each week, and the full questionnaires in weeks one and eight.</p>
+            </div>
+          </li>
+          <li>
+            <span class="mono step-when">week 8</span>
+            <div>
+              <h3>report and review</h3>
+              <p>you get the outcome report and forty-five minutes with us to read it together and decide whether to continue, widen or stop.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section" id="gets">
+        <p class="label">what your school gets</p>
+        <div class="cards">
+          <div class="card">
+            <h3>an outcome report</h3>
+            <p>four pages. what changed in each section between week one and week eight, on three published questionnaires, with every number shown next to how many students answered.</p>
+          </div>
+          <div class="card">
+            <h3>a class dashboard</h3>
+            <p>weekly class averages from week one, so you can see a section drifting before the term ends. <a href="#dashboard">see the sample</a>.</p>
+          </div>
+          <div class="card">
+            <h3>teacher playbooks</h3>
+            <p>question maps for every chapter used in the pilot, written with your teachers and theirs to keep.</p>
+          </div>
+          <div class="card">
+            <h3>a straight answer</h3>
+            <p>a review meeting where we tell you what did not move as clearly as what did.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="report">
+        <h2>the outcome report, <em>built on three questionnaires</em></h2>
+        <p class="dek">we did not invent a scale. each measure comes from published research, and the report names its source.</p>
+        <div class="instruments">
+          <article class="instrument">
+            <p class="label">curiosity <span class="count">cei-ii</span></p>
+            <h3>Curiosity and Exploration Inventory II</h3>
+            <p>ten items from psychologist Todd Kashdan, who studies curiosity and well-being at George Mason University, and his colleagues. it reads two things: stretching (seeking out new knowledge and experience) and embracing (staying with the new and uncertain instead of avoiding it). five-point scale.</p>
+            <p class="caption source">Kashdan, T. B., Gallagher, M. W., Silvia, P. J., et al. (2009). The Curiosity and Exploration Inventory-II. Journal of Research in Personality, 43(6), 987-998.</p>
+          </article>
+          <article class="instrument">
+            <p class="label">motivation <span class="count">imi</span></p>
+            <h3>Intrinsic Motivation Inventory, short form</h3>
+            <p>from the self-determination theory research of Edward Deci and Richard Ryan, psychologists at the University of Rochester who showed that people learn best when they feel choice, competence and connection. we use four subscales: interest and enjoyment, perceived competence, perceived choice, and pressure (reverse scored). seven-point scale.</p>
+            <p class="caption source">Ryan, R. M. (1982). Control and information in the intrapersonal sphere. Journal of Personality and Social Psychology, 43(3), 450-461. Scale and scoring: selfdeterminationtheory.org.</p>
+          </article>
+          <article class="instrument">
+            <p class="label">self-efficacy <span class="count">pals</span></p>
+            <h3>academic efficacy items, Patterns of Adaptive Learning Scales</h3>
+            <p>five items written for middle-school students by Carol Midgley, an educational psychologist at the University of Michigan, and her team. they rest on the work of Albert Bandura, the Stanford psychologist who defined self-efficacy: a student's belief that they can do the work in front of them. five-point scale.</p>
+            <p class="caption source">Midgley, C., Maehr, M. L., Hruda, L. Z., et al. (2000). Manual for the Patterns of Adaptive Learning Scales. University of Michigan. Bandura, A. (1997). Self-efficacy: the exercise of control. W. H. Freeman.</p>
+          </article>
+        </div>
+        <div class="prose honest">
+          <p>what the report can say: how each section's average moved over eight weeks, and how confident we are in that movement given how many students answered.</p>
+          <p>what it cannot say: that pramaan caused the change. a pilot has no comparison group, and these are self-report questionnaires. we read items aloud in english or kannada where it helps, and note every adaptation in the report.</p>
+        </div>
+      </section>
+
+      <section class="section" id="never">
+        <p class="label">what we never do</p>
+        <ul class="never">
+          <li>no child is named, scored or ranked. the report and the dashboard show class averages only.</li>
+          <li>no class figure is shown when fewer than ten students answered that week.</li>
+          <li>no leaderboards, and no screen tells a child how they did.</li>
+          <li>no child data leaves the school. questionnaires are on paper or the school's own device, and we take away class totals.</li>
+          <li>parental consent for every child, because the Digital Personal Data Protection Act, 2023 treats everyone under eighteen as a child.</li>
+        </ul>
+      </section>
+
+      <section class="section" id="price">
+        <p class="label">what it costs <span class="stamp">placeholder</span></p>
+        <div class="table-wrap">
+          <table class="price">
+            <thead><tr><th>item</th><th>what is included</th><th class="right">price</th></tr></thead>
+            <tbody>
+              <tr><td>pilot</td><td>eight weeks, up to four sections, report, dashboard, training, review</td><td class="data right">₹60,000 flat</td></tr>
+              <tr><td>after the pilot</td><td>per student, per term, same sections or wider</td><td class="data right">₹1,500</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="caption">placeholder figures to start the conversation, not a quote. pricing is settled on the call.</p>
+      </section>
+
+      <section class="section" id="book">
+        <h2>book a <em>20-minute call</em></h2>
+        <p class="dek">twenty minutes to see if a pilot fits your school this term. no form, nothing stored: the button opens your email with a short note already written.</p>
+        <div class="row">
+          <a class="pill primary" id="book-mail" href="#">book a 20-minute call</a>
+          <a class="pill" href="#dashboard">see the sample dashboard →</a>
+        </div>
+        <p class="caption">placeholder link: the pilots inbox is not live yet, so add the address in your mail app.</p>
+      </section>
+    </main>
+
+    <!-- ============ view 2: dashboard ============ -->
+    <main id="view-dashboard" class="view" data-view="dashboard" hidden>
+      <section class="section">
+        <p class="row dash-flag"><span class="stamp stop">mock data</span> <span class="caption">a fictional school. every number is generated from a fixed seed.</span></p>
+        <h1>hill view school, <em>eight weeks in</em></h1>
+        <p class="dek">what a principal sees during a pilot: class averages for curiosity, motivation and self-efficacy, week by week. no child is named and no child is scored.</p>
+        <p class="mono meta-line" id="dash-meta"></p>
+      </section>
+
+      <section class="section dash-controls">
+        <div class="row" role="group" aria-label="choose a view">
+          <span class="caption">view</span>
+          <div class="row" id="class-pills"></div>
+        </div>
+        <button class="pill" id="export" type="button">export csv</button>
+      </section>
+
+      <section class="section">
+        <p class="label" id="scope-label">whole school</p>
+        <div class="tiles" id="tiles"></div>
+        <div class="charts" id="charts"></div>
+        <p class="caption legend" id="legend"></p>
+      </section>
+
+      <section class="section">
+        <p class="label" id="table-label">by section</p>
+        <div class="table-wrap" id="table"></div>
+        <ul class="notes" id="notes"></ul>
+      </section>
+
+      <section class="section">
+        <p class="label">how to read this</p>
+        <div class="prose">
+          <p>higher means more: more curious, more interested, more sure they can do the work. each line is a class average on the questionnaire's own scale, so the curiosity and self-efficacy charts run from one to five and motivation runs from one to seven.</p>
+          <p>a change is a movement in a class, not a grade for a child. with no comparison group, read it as a signal to talk about with your teachers, not as proof.</p>
+        </div>
+      </section>
+    </main>
+
+    <nav class="page-end" aria-label="switch view">
+      <a class="pill" href="#offer" data-end="offer">the offer</a>
+      <a class="pill" href="#dashboard" data-end="dashboard">sample dashboard →</a>
+    </nav>
+
+    <footer class="footer">
+      <ol class="sitemap">
+        <li><a href="#offer">the offer</a></li>
+        <li><a href="#report">the outcome report</a></li>
+        <li><a href="#never">what we never do</a></li>
+        <li><a href="#price">what it costs</a></li>
+        <li><a href="#book">book a call</a></li>
+        <li><a href="#dashboard">sample dashboard</a></li>
+        <li><a href="https://github.com/ananyapradhan02/pramaan-schools" target="_blank" rel="noopener">source</a></li>
+        <li><a href="https://ananyapradhan02.github.io/morning-build/" target="_blank" rel="noopener">morning build</a></li>
+      </ol>
+      <p class="colophon">set in newsreader, figtree and ibm plex mono. no analytics. © ananya pradhan</p>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
