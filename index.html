@@ -86,7 +86,7 @@
         <div class="cards">
           <div class="card">
             <h3>an outcome report</h3>
-            <p>four pages. what changed in each section between week one and week eight, on three published questionnaires, with every number shown next to how many students answered.</p>
+            <p>one page for your management committee. what changed in each section between week one and week eight, on three published questionnaires, with every number shown next to how many students answered. <a href="#report">see the report</a>.</p>
           </div>
           <div class="card">
             <h3>a class dashboard</h3>
@@ -103,7 +103,7 @@
         </div>
       </section>
 
-      <section class="section" id="report">
+      <section class="section" id="outcome">
         <h2>the outcome report, <em>built on three questionnaires</em></h2>
         <p class="dek">we did not invent a scale. each measure comes from published research, and the report names its source.</p>
         <div class="instruments">
@@ -182,7 +182,10 @@
           <span class="caption">view</span>
           <div class="row" id="class-pills"></div>
         </div>
-        <button class="pill" id="export" type="button">export csv</button>
+        <div class="row dash-actions">
+          <a class="pill primary" href="#report" id="to-report">print the outcome report</a>
+          <button class="pill" id="export" type="button">export csv</button>
+        </div>
       </section>
 
       <section class="section">
@@ -207,6 +210,59 @@
       </section>
     </main>
 
+    <!-- ============ view 3: the one-page outcome report ============ -->
+    <main id="view-report" class="view" data-view="report" hidden>
+      <div class="row report-actions no-print">
+        <button class="pill primary" id="print" type="button">print or save as pdf</button>
+        <a class="pill" href="#dashboard">← back to the dashboard</a>
+        <span class="caption">fits one a4 page, in light colours.</span>
+      </div>
+      <article class="sheet" aria-labelledby="sheet-title">
+        <header class="sheet-head">
+          <p class="label">pramaan pilot · outcome report</p>
+          <h1 class="sheet-title" id="sheet-title">hill view school, <em>week 1 to week 8</em></h1>
+          <p class="mono sheet-meta" id="rep-meta"></p>
+        </header>
+
+        <section class="sheet-part">
+          <p class="label">what moved, class averages</p>
+          <div class="charts rep-charts" id="rep-charts"></div>
+          <p class="caption legend" id="rep-legend"></p>
+        </section>
+
+        <section class="sheet-part">
+          <p class="label">by section, week 1 → week 8</p>
+          <div id="rep-table"></div>
+          <p class="caption rep-held" id="rep-held"></p>
+        </section>
+
+        <section class="sheet-part sheet-two">
+          <div>
+            <p class="label">what this report can say</p>
+            <p>how each section's average moved over eight weeks on three published questionnaires, and how many students answered each time. a class movement is a reason to talk with your teachers.</p>
+          </div>
+          <div>
+            <p class="label">what it cannot say</p>
+            <p>that pramaan caused the change. a pilot has no comparison group, and these are self-report questionnaires. it says nothing about any one child: no child is named, scored or ranked.</p>
+          </div>
+        </section>
+
+        <section class="sheet-part">
+          <p class="label">the instruments</p>
+          <ul class="rep-inst">
+            <li><strong>curiosity</strong> <span class="mono">cei-ii · 10 items · 1 to 5</span> Kashdan, T. B., Gallagher, M. W., Silvia, P. J., et al. (2009). The Curiosity and Exploration Inventory-II. Journal of Research in Personality, 43(6), 987-998.</li>
+            <li><strong>motivation</strong> <span class="mono">imi short form · 1 to 7</span> Ryan, R. M. (1982). Control and information in the intrapersonal sphere. Journal of Personality and Social Psychology, 43(3), 450-461. Scale and scoring: selfdeterminationtheory.org.</li>
+            <li><strong>self-efficacy</strong> <span class="mono">pals academic efficacy · 5 items · 1 to 5</span> Midgley, C., Maehr, M. L., Hruda, L. Z., et al. (2000). Manual for the Patterns of Adaptive Learning Scales. University of Michigan.</li>
+          </ul>
+        </section>
+
+        <section class="sheet-part sheet-next">
+          <p class="label">next step</p>
+          <p>a 30-minute call to read this together and decide whether to continue, widen or stop. book at <a href="https://calendly.com/ananyapradhan/30min" target="_blank" rel="noopener">calendly.com/ananyapradhan/30min</a> or write to <a href="mailto:ananyapradhan02@gmail.com">ananyapradhan02@gmail.com</a>.</p>
+        </section>
+      </article>
+    </main>
+
     <nav class="page-end" aria-label="switch view">
       <a class="pill" href="#offer" data-end="offer">the offer</a>
       <a class="pill" href="#dashboard" data-end="dashboard">dashboard →</a>
@@ -215,16 +271,17 @@
     <footer class="footer">
       <ol class="sitemap">
         <li><a href="#offer">the offer</a></li>
-        <li><a href="#report">the outcome report</a></li>
+        <li><a href="#outcome">the instruments</a></li>
         <li><a href="#never">what we never do</a></li>
         <li><a href="#price">what it costs</a></li>
         <li><a href="https://calendly.com/ananyapradhan/30min" target="_blank" rel="noopener">book a call</a></li>
         <li><a href="#dashboard">dashboard</a></li>
+        <li><a href="#report">the outcome report</a></li>
         <li><a href="mailto:ananyapradhan02@gmail.com">contact</a></li>
         <li><a href="https://github.com/ananyapradhan02/pramaan-schools" target="_blank" rel="noopener">source</a></li>
         <li><a href="https://ananyapradhan02.github.io/morning-build/" target="_blank" rel="noopener">morning build</a></li>
       </ol>
-      <p class="colophon">set in newsreader, figtree and ibm plex mono. no analytics. © ananya pradhan</p>
+      <p class="colophon">v0.3 · 30.09.26 · set in newsreader, figtree and ibm plex mono. no analytics. © ananya pradhan</p>
     </footer>
   </div>
   <script src="app.js"></script>

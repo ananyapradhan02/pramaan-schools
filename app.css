@@ -90,6 +90,84 @@
 .notes li { padding: .45em 0; font-size: .9rem; color: var(--text-2); border-bottom: 1px solid var(--rule); }
 .notes li .mono { display: inline-block; min-width: 9.5em; color: var(--text); }
 
+.dash-actions { gap: .4rem; }
+
+/* phone: tables stack into labelled rows instead of scrolling sideways */
+@media (max-width: 560px) {
+  #table table { min-width: 0; }
+  table.stack-sm, table.stack-sm tbody, table.stack-sm tr, table.stack-sm td { display: block; width: 100%; }
+  table.stack-sm thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  table.stack-sm tr { padding: .5em 0; border-bottom: 1px solid var(--rule); }
+  table.stack-sm td { display: flex; justify-content: flex-end; align-items: baseline; gap: .5em; border-bottom: 0; padding: .2em 0; text-align: right; }
+  table.stack-sm td::before { content: attr(data-label); margin-right: auto; font-family: var(--sans); font-size: .75rem; color: var(--text-3); text-align: left; }
+  table.stack-sm td:first-child { font-size: .9rem; font-weight: 500; }
+  table.stack-sm td.open-cell { justify-content: flex-start; padding-top: .4em; }
+  table.stack-sm td.open-cell::before { content: none; }
+}
+
+/* the one-page outcome report */
+.report-actions { gap: .5rem; padding-block: var(--s2); }
+.sheet { max-width: var(--wide); border: 1.5px solid var(--ink); padding: var(--s2); }
+.sheet .label { margin-bottom: .6rem; }
+.sheet-title { font-size: clamp(1.9rem, 4vw, 3rem); letter-spacing: -.02em; line-height: 1; margin-bottom: .4rem; }
+.sheet-meta { color: var(--text-3); margin: 0; }
+.sheet-part { padding-top: var(--s1); margin-top: var(--s1); border-top: 1px solid var(--rule); }
+.sheet-head + .sheet-part { margin-top: var(--s2); }
+.sheet-part p { margin: 0; }
+.rep-charts { grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--s1) var(--s2); }
+.rep-charts .count { text-transform: none; }
+.rep-table .total td { font-weight: 600; border-top: 1.5px solid var(--ink); }
+.rep-held { margin-top: .5rem !important; }
+.sheet-two { display: grid; gap: var(--s2); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
+.sheet-two p:not(.label), .sheet-next p:not(.label) { font-family: var(--serif); font-size: 1rem; line-height: 1.5; color: var(--text-2); }
+.rep-inst { list-style: none; padding: 0; margin: 0; font-size: .8rem; color: var(--text-2); line-height: 1.45; }
+.rep-inst li { padding: .25em 0; }
+.rep-inst strong { color: var(--text); font-weight: 600; margin-right: .4em; }
+.rep-inst .mono { color: var(--text-3); margin-right: .5em; }
+
 @media (max-width: 520px) {
   .sitemap { columns: 1; }
+  .sheet { border: 0; padding: 0; }
+}
+
+/* print: the report only, one a4 page, light tokens whatever the screen theme */
+@page { size: A4; margin: 11mm 12mm; }
+@media print {
+  :root, :root[data-theme="dark"], :root:not([data-theme="light"]) {
+    --ink: #123524;
+    --ink-rgb: 18, 53, 36;
+    --paper: #f6f4ec;
+    --paper-2: #efeee4;
+    --tint-1: #e5ede7;
+    --tint-2: #d3e0d7;
+    --tint-3: #bcd0c3;
+    --green-mid: #2f6b4f;
+    --green-soft: #8fb8a2;
+    --rust: #b8452a;
+    --rust-soft: #ead2c8;
+    --highlight: #f3e08f;
+    color-scheme: light;
+  }
+  html, body { background: transparent; font-size: 11px; }
+  .container { max-width: none; padding: 0; }
+  .topbar, footer.footer, .page-end, .no-print, #view-offer, #view-dashboard { display: none !important; }
+  .enter { animation: none; }
+  .sheet { border: 0; padding: 0; max-width: none; }
+  .sheet-title { font-size: 26px; }
+  .sheet-part { padding-top: 7px; margin-top: 7px; break-inside: avoid; }
+  .sheet-head + .sheet-part { margin-top: 10px; }
+  .sheet .label { margin-bottom: 5px; font-size: 9px; }
+  .rep-charts { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .chart figcaption { font-size: 10px; }
+  .chart svg { max-height: 44mm; }
+  .legend { margin-top: 4px; }
+  table { font-size: 10px; }
+  th { font-size: 8.5px; padding: 3px 4px; }
+  td { padding: 3px 4px; }
+  td.data, .mono { font-size: 9.5px; }
+  .caption { font-size: 9px; }
+  .sheet-two p:not(.label), .sheet-next p:not(.label) { font-size: 11px; line-height: 1.4; }
+  .rep-inst { font-size: 9px; }
+  a { text-decoration: none; }
+  a[target="_blank"]::after { content: none; }
 }

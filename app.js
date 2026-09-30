@@ -1,6 +1,6 @@
-/* pramaan schools v0.1
-   two views in one page: the pilot offer and a sample cohort dashboard.
-   the dashboard runs on mock data generated from a fixed seed. class aggregates only:
+/* pramaan schools v0.3
+   three views in one page: the pilot offer, a sample cohort dashboard, and the one-page outcome report.
+   the dashboard and report run on illustrative data generated from a fixed seed. class aggregates only:
    there is no child-level data anywhere in this file, and nothing leaves the browser.
    all markup below is built from the constants in this file; any text is escaped. */
 (function () {
@@ -179,14 +179,20 @@
     }).join(''));
   }
 
+  function schoolLines(s) {
+    var lines = CLASSES.map(function (c) {
+      return { cls: 'faint-ln', label: c.id, values: rows[c.id].map(function (r) { return r[s.key]; }) };
+    });
+    lines.push({ cls: 'main', label: 'whole school', points: true, endLabel: 'all', values: school.map(function (r) { return r[s.key]; }) });
+    return lines;
+  }
+  var LEGEND_ALL = '<span><span class="key key-main"></span>whole school average</span> <span><span class="key key-faint"></span>each section</span> <span><span class="key key-mark"></span>week 5, rain closures</span>';
+
   function renderCharts() {
     put('charts', SCALES.map(function (s) {
       var lines, aria, fl;
       if (current === 'all') {
-        lines = CLASSES.map(function (c) {
-          return { cls: 'faint-ln', label: c.id, values: rows[c.id].map(function (r) { return r[s.key]; }) };
-        });
-        lines.push({ cls: 'main', label: 'whole school', points: true, endLabel: 'all', values: school.map(function (r) { return r[s.key]; }) });
+        lines = schoolLines(s);
         fl = firstLast(school, s.key);
         aria = s.name + ', whole school average, week 1 ' + fl.first.toFixed(2) + ', week 8 ' + fl.last.toFixed(2) + ', on a ' + s.min + ' to ' + s.max + ' scale.';
       } else {
@@ -203,7 +209,7 @@
         '</figure>';
     }).join(''));
     put('legend', current === 'all'
-      ? '<span><span class="key key-main"></span>whole school average</span> <span><span class="key key-faint"></span>each section</span> <span><span class="key key-mark"></span>week 5, rain closures</span>'
+      ? LEGEND_ALL
       : '<span><span class="key key-main"></span>' + esc(current) + '</span> <span><span class="key key-compare"></span>whole school average</span> <span><span class="key key-mark"></span>week 5, rain closures</span>');
   }
 
@@ -211,30 +217,30 @@
     var h;
     if (current === 'all') {
       el('table-label').textContent = 'by section, week 1 → week 8';
-      h = '<table><thead><tr><th>section</th><th class="right">enrolled</th>' +
+      h = '<table class="stack-sm"><thead><tr><th>section</th><th class="right">enrolled</th>' +
         SCALES.map(function (s) { return '<th class="right">' + s.name + '</th>'; }).join('') +
         '<th class="right">answered</th><th><span class="sr-only">open</span></th></tr></thead><tbody>';
       CLASSES.forEach(function (c) {
-        h += '<tr><td class="data">' + c.id + '</td><td class="data right">' + c.enrolled + '</td>';
+        h += '<tr><td class="data" data-label="section">' + c.id + '</td><td class="data right" data-label="enrolled">' + c.enrolled + '</td>';
         SCALES.forEach(function (s) {
           var fl = firstLast(rows[c.id], s.key);
-          h += '<td class="data right nowrap">' + fl.first.toFixed(2) + ' → ' + fl.last.toFixed(2) + ' <span class="' + (fl.change > 0 ? 'ok' : 'muted') + '">' + sign(fl.change) + '</span></td>';
+          h += '<td class="data right nowrap" data-label="' + s.name + '">' + fl.first.toFixed(2) + ' → ' + fl.last.toFixed(2) + ' <span class="' + (fl.change > 0 ? 'ok' : 'muted') + '">' + sign(fl.change) + '</span></td>';
         });
-        h += '<td class="data right">' + responseRate(rows[c.id]) + '%</td>' +
-          '<td class="right"><a class="pill" href="#dashboard/' + c.id + '">open ' + c.id + '</a></td></tr>';
+        h += '<td class="data right" data-label="answered">' + responseRate(rows[c.id]) + '%</td>' +
+          '<td class="right open-cell"><a class="pill" href="#dashboard/' + c.id + '">open ' + c.id + '</a></td></tr>';
       });
       h += '</tbody></table>';
     } else {
       el('table-label').textContent = current + ', week by week';
-      h = '<table><thead><tr><th>week</th><th>from</th>' +
+      h = '<table class="stack-sm"><thead><tr><th>week</th><th>from</th>' +
         SCALES.map(function (s) { return '<th class="right">' + s.name + '</th>'; }).join('') +
         '<th class="right">answered</th></tr></thead><tbody>';
       rows[current].forEach(function (r) {
-        h += '<tr><td class="data">w' + r.week + '</td><td><time>' + r.date + '</time></td>';
+        h += '<tr><td class="data" data-label="week">w' + r.week + '</td><td data-label="from"><time>' + r.date + '</time></td>';
         SCALES.forEach(function (s) {
-          h += '<td class="data right">' + (r.held ? '<span class="muted">held back</span>' : r[s.key].toFixed(2)) + '</td>';
+          h += '<td class="data right" data-label="' + s.name + '">' + (r.held ? '<span class="muted">held back</span>' : r[s.key].toFixed(2)) + '</td>';
         });
-        h += '<td class="data right nowrap">' + r.responses + ' / ' + r.enrolled + '</td></tr>';
+        h += '<td class="data right nowrap" data-label="answered">' + r.responses + ' / ' + r.enrolled + '</td></tr>';
       });
       h += '</tbody></table>';
     }
@@ -256,6 +262,50 @@
     renderCharts();
     renderTable();
   }
+
+  /* ---------- the one-page outcome report ---------- */
+  function pilotEnd() { var d = weekDate(WEEKS); d.setDate(d.getDate() + 5); return d; }
+  function moveCell(series, s) {
+    var fl = firstLast(series, s.key);
+    return '<td class="data right nowrap" data-label="' + s.name + '">' + fl.first.toFixed(2) + ' → ' + fl.last.toFixed(2) +
+      ' <span class="' + (fl.change > 0 ? 'ok' : 'muted') + '">' + sign(fl.change) + '</span></td>';
+  }
+  function renderReport() {
+    el('rep-meta').textContent = 'pilot ' + fmt(START) + ' → ' + fmt(pilotEnd()) + ' · grades 6 to 8 · ' + CLASSES.length +
+      ' sections · ' + TOTAL + ' enrolled · two sessions a week';
+    put('rep-charts', SCALES.map(function (s) {
+      var fl = firstLast(school, s.key);
+      var aria = s.name + ', whole school average, week 1 ' + fl.first.toFixed(2) + ', week 8 ' + fl.last.toFixed(2) + ', on a ' + s.min + ' to ' + s.max + ' scale.';
+      return '<figure class="chart">' +
+        '<figcaption><span class="chart-name">' + s.name + '</span><span class="count">' + esc(s.inst) + ' · ' + s.min + ' to ' + s.max + '</span></figcaption>' +
+        '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(aria) + '">' + chart(s, schoolLines(s)) + '</svg>' +
+        '</figure>';
+    }).join(''));
+    put('rep-legend', LEGEND_ALL);
+
+    var h = '<table class="stack-sm rep-table"><thead><tr><th>section</th><th class="right">answered w1 · w8</th>' +
+      SCALES.map(function (s) { return '<th class="right">' + s.name + '</th>'; }).join('') + '</tr></thead><tbody>';
+    CLASSES.forEach(function (c) {
+      var r = rows[c.id];
+      h += '<tr><td class="data" data-label="section">' + c.id + '</td>' +
+        '<td class="data right nowrap" data-label="answered w1 · w8">' + r[0].responses + ' · ' + r[WEEKS - 1].responses + ' of ' + c.enrolled + '</td>' +
+        SCALES.map(function (s) { return moveCell(r, s); }).join('') + '</tr>';
+    });
+    h += '<tr class="total"><td class="data" data-label="section">all</td>' +
+      '<td class="data right nowrap" data-label="answered w1 · w8">' + school[0].responses + ' · ' + school[WEEKS - 1].responses + ' of ' + TOTAL + '</td>' +
+      SCALES.map(function (s) { return moveCell(school, s); }).join('') + '</tr>';
+    h += '</tbody></table>';
+    put('rep-table', h);
+
+    var held = [];
+    CLASSES.forEach(function (c) {
+      rows[c.id].forEach(function (r) { if (r.held) held.push(c.id + ' in week ' + r.week + ' (' + r.responses + ' answered)'); });
+    });
+    el('rep-held').textContent = 'a class figure is held back when fewer than ten students answered. ' +
+      (held.length ? 'held back this pilot: ' + held.join(', ') + '. the whole-school line uses the sections shown that week.' : 'nothing was held back this pilot.') +
+      ' averages are on each questionnaire\'s own scale; higher means more.';
+  }
+  el('print').addEventListener('click', function () { window.print(); });
 
   /* ---------- csv export (blob, works from file://) ---------- */
   function csvCell(v) {
@@ -290,23 +340,28 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
   });
 
-  /* ---------- router: #offer (and its anchors), #dashboard, #dashboard/6A ---------- */
+  /* ---------- router: #offer (and its anchors), #dashboard, #dashboard/6A, #report ---------- */
   function route() {
     var hash = (location.hash || '#offer').slice(1);
+    var isReport = hash === 'report';
     var isDash = hash === 'dashboard' || hash.indexOf('dashboard/') === 0;
     var wasDash = !el('view-dashboard').hidden;
-    el('view-offer').hidden = isDash;
+    el('view-offer').hidden = isDash || isReport;
     el('view-dashboard').hidden = !isDash;
+    el('view-report').hidden = !isReport;
     Array.prototype.forEach.call(document.querySelectorAll('[data-nav]'), function (a) {
-      var on = (a.getAttribute('data-nav') === 'dashboard') === isDash;
+      var on = (a.getAttribute('data-nav') === 'dashboard') === (isDash || isReport);
       a.classList.toggle('active', on);
       if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
     Array.prototype.forEach.call(document.querySelectorAll('[data-end]'), function (a) {
-      a.hidden = (a.getAttribute('data-end') === 'dashboard') === isDash;
+      a.hidden = !isReport && (a.getAttribute('data-end') === 'dashboard') === isDash;
     });
-    document.title = isDash ? 'dashboard · pramaan for schools' : 'pramaan for schools';
-    if (isDash) {
+    document.title = isReport ? 'outcome report · hill view school · pramaan' : isDash ? 'dashboard · pramaan for schools' : 'pramaan for schools';
+    if (isReport) {
+      renderReport();
+      window.scrollTo(0, 0);
+    } else if (isDash) {
       var id = hash.split('/')[1];
       current = CLASSES.some(function (c) { return c.id === id; }) ? id : 'all';
       renderDashboard();
